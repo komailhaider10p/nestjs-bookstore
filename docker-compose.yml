@@ -1,0 +1,21 @@
+version: '2.1'
+
+services:
+  localstack:
+    container_name: "localstack_demo"
+    image: localstack/localstack
+    ports:
+      - "4566-4599:4566-4599"
+      - "8080:8080"
+    environment:
+      - SERVICES=s3,lambda
+      - DEBUG=1
+      - DATA_DIR=/tmp/localstack/data
+      - PORT_WEB_UI=8080
+      - LAMBDA_EXECUTOR=docker-reuse
+      - KINESIS_ERROR_PROBABILITY=0
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - HOST_TMP_FOLDER=./.localstack
+    volumes:
+      - "./.localstack:/tmp/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"

@@ -3,6 +3,7 @@ import { BooksService } from './books.service';
 import { CreateBookDTO } from './dto/create-book.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { ApiBearerAuth, ApiParam } from '@nestjs/swagger';
+
 @Controller('books')
 export class BooksController {
     constructor(private booksService: BooksService) { }
@@ -16,7 +17,7 @@ export class BooksController {
 
     @ApiBearerAuth()
     @ApiParam({
-        name:'bookID',
+        name: 'bookID',
         type: 'number'
     })
     @UseGuards(JwtAuthGuard)
